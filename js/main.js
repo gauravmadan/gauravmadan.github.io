@@ -1,7 +1,8 @@
 /* ================================================================
-   Depth rail: the marker descends as you scroll, and the readout
-   interpolates a "depth" between each section's data-depth value.
-   Plus a small mobile menu toggle. No dependencies.
+   Depth rail: marker descends with scroll; the readout interpolates
+   depth between section tops, anchored to the TOP of the viewport.
+   Depth = a section's data-depth exactly when that section's top
+   reaches the top of the screen. Plus the mobile menu toggle.
    ================================================================ */
 
 (function () {
@@ -10,46 +11,48 @@
   const rail = document.querySelector('.depth-rail');
   const panels = Array.from(document.querySelectorAll('.panel[data-depth]'));
 
+  function breakpoints() {
+    // (scroll position, depth) pairs; clamped so the deepest value
+    // is reachable even when the last section is shorter than the viewport
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const pts = panels.map(p => ({
+      y: Math.min(p.offsetTop, maxScroll),
+      d: parseFloat(p.dataset.depth)
+    }));
+    pts.sort((a, b) => a.y - b.y);
+    return { pts, maxScroll };
+  }
+
+  function depthAt(scrollTop, pts) {
+    if (pts.length === 0) return 0;
+    if (scrollTop <= pts[0].y) return pts[0].d;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1];
+      if (scrollTop >= a.y && scrollTop < b.y) {
+        const t = (scrollTop - a.y) / Math.max(1, b.y - a.y);
+        return a.d + t * (b.d - a.d);
+      }
+    }
+    return pts[pts.length - 1].d;
+  }
+
   function updateDepth() {
     if (!marker || !rail || panels.length === 0) return;
 
     const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const frac = docHeight > 0 ? scrollTop / docHeight : 0;
+    const { pts, maxScroll } = breakpoints();
 
-    // Move the marker along the rail
+    // Marker travels the rail proportionally to total scroll
+    const frac = Math.min(1, scrollTop / maxScroll);
     const railHeight = rail.clientHeight - 12;
     marker.style.top = (frac * railHeight) + 'px';
 
-    // Interpolate depth between panels based on viewport centre
-    const centre = scrollTop + window.innerHeight / 2;
-    let depth = -500;
-
-    for (let i = 0; i < panels.length; i++) {
-      const p = panels[i];
-      const top = p.offsetTop;
-      const bottom = top + p.offsetHeight;
-      const d = parseFloat(p.dataset.depth);
-
-      if (centre >= top && centre < bottom) {
-        const next = panels[i + 1];
-        if (next) {
-          const dNext = parseFloat(next.dataset.depth);
-          const within = (centre - top) / (bottom - top);
-          depth = d + within * (dNext - d);
-        } else {
-          depth = d;
-        }
-        break;
-      }
-      if (centre >= bottom) depth = d;
-    }
-
-    readout.textContent = Math.round(depth) + ' m';
+    readout.textContent = Math.round(depthAt(scrollTop, pts)) + ' m';
   }
 
   window.addEventListener('scroll', updateDepth, { passive: true });
   window.addEventListener('resize', updateDepth);
+  window.addEventListener('load', updateDepth);
   updateDepth();
 
   // Mobile menu
@@ -62,7 +65,6 @@
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
-    // Close menu after choosing a link
     links.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') {
         links.classList.remove('open');

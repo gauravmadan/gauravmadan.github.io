@@ -23,7 +23,7 @@
 
     // Interpolate depth between panels based on viewport centre
     const centre = scrollTop + window.innerHeight / 2;
-    let depth = 0;
+    let depth = -500;
 
     for (let i = 0; i < panels.length; i++) {
       const p = panels[i];

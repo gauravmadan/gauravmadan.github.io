@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaurav Madan | Physical Oceanographer</title>
+  <meta name="description" content="Gaurav Madan is a physical oceanographer at NCAS, University of Reading, studying AMOC sensitivity in CMIP6 and LongRunMIP simulations.">
+
+  <!-- ============================================================
+       FONTS: Spectral (headings & body) + IBM Plex Mono (labels)
+       Swap these in one place if you want a different pairing.
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION / MENU BAR
+       To add a new link: copy one <li> line and edit it.
+       Internal links use #section-id. External links use full URLs
+       and should keep target="_blank".
+       ============================================================ -->
+  <header class="site-nav" id="top">
+    <nav aria-label="Main navigation">
+      <a class="nav-name" href="#top">G. MADAN</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#beyond">Beyond Science</a></li>
+        <li><a href="https://egonomics.blog" target="_blank" rel="noopener">Writing ↗</a></li>
+        <!-- ADD MORE MENU LINKS HERE, for example:
+        <li><a href="https://your-photography-site.com" target="_blank" rel="noopener">Photography ↗</a></li>
+        <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">Code ↗</a></li>
+        -->
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       DEPTH RAIL (the signature element)
+       A fixed scale on the left. The marker tracks your scroll
+       position as if you were descending the water column.
+       Hidden automatically on small screens.
+       ============================================================ -->
+  <aside class="depth-rail" aria-hidden="true">
+    <div class="depth-line"></div>
+    <div class="depth-marker" id="depth-marker">
+      <span id="depth-readout">0 m</span>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ========================================================
+         HERO / SURFACE (0 m)
+         ======================================================== -->
+    <section class="panel panel-surface" data-depth="0">
+      <div class="wrap hero">
+        <p class="eyebrow">0 m &middot; SURFACE &middot; 51.44&deg;N, 0.94&deg;W</p>
+        <h1>Gaurav Madan</h1>
+        <p class="hero-sub">Physical oceanographer studying how the Atlantic
+        Meridional Overturning Circulation responds to a warming world.</p>
+        <p class="hero-detail">Research Scientist, National Centre for Atmospheric
+        Science, University of Reading. PhD, University of Oslo.</p>
+        <a class="descend-cue" href="#research">
+          <span>Descend</span>
+          <svg width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true">
+            <path d="M8 2v18M2 14l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <!-- Decorative isopycnal contour lines -->
+      <svg class="contours" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,60 C200,30 400,90 600,60 S1000,20 1200,55" />
+        <path d="M0,110 C250,80 450,140 650,110 S1000,75 1200,105" />
+        <path d="M0,160 C200,135 500,190 700,160 S1050,130 1200,158" />
+      </svg>
+    </section>
+
+    <!-- ========================================================
+         RESEARCH (1000 m, where the AMOC lives)
+         ======================================================== -->
+    <section class="panel panel-thermocline" id="research" data-depth="1000">
+      <div class="wrap">
+        <p class="eyebrow">1000 m &middot; RESEARCH</p>
+        <h2>The overturning, under forcing</h2>
+        <p class="lede">The AMOC moves heat, salt and carbon across the planet.
+        I study what happens to it when you push it: how it weakens, whether it
+        recovers, and which buoyancy pathways, thermal or haline, do the work.</p>
+
+        <div class="research-grid">
+          <!-- Edit or duplicate these cards for your own topics -->
+          <article class="card">
+            <h3>AMOC sensitivity in CMIP6</h3>
+            <p>Diagnosing overturning strength and variability across CMIP6
+            ensembles, from 26.5&deg;N to the subpolar gyre, with drift-corrected
+            pipelines built on xarray and NetCDF.</p>
+          </article>
+          <article class="card">
+            <h3>LongRunMIP &amp; millennial recovery</h3>
+            <p>Multi-century abrupt CO2 experiments reveal thermal versus haline
+            controls on AMOC weakening and recovery, including regimes where the
+            two actively oppose one another.</p>
+          </article>
+          <article class="card">
+            <h3>Causal inference for ocean dynamics</h3>
+            <p>Applying PCMCI and Granger-causal frameworks to disentangle
+            drivers of overturning variability from the noise of internal
+            climate variability.</p>
+          </article>
+          <article class="card">
+            <h3>EPOC &amp; ALPACA</h3>
+            <p>Contributing to European projects probing the past, present and
+            future of Atlantic overturning, working with observational and
+            modelling communities on JASMIN infrastructure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         PUBLICATIONS (2000 m)
+         Replace the placeholders with your real papers.
+         ======================================================== -->
+    <section class="panel panel-deep" id="publications" data-depth="2000">
+      <div class="wrap">
+        <p class="eyebrow">2000 m &middot; PUBLICATIONS &amp; TALKS</p>
+        <h2>On the record</h2>
+        <ol class="pub-list">
+          <!-- TEMPLATE: copy this <li> block for each publication -->
+          <li>
+            <span class="pub-year">2026</span>
+            <div>
+              <p class="pub-title">Your paper title goes here</p>
+              <p class="pub-meta">Journal Name &middot; <a href="#">doi link</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="pub-year">2025</span>
+            <div>
+              <p class="pub-title">Another paper title goes here</p>
+              <p class="pub-meta">Journal Name &middot; <a href="#">doi link</a></p>
+            </div>
+          </li>
+        </ol>
+        <p class="aside-note">Full list on
+          <a href="#" target="_blank" rel="noopener">Google Scholar</a> and
+          <a href="#" target="_blank" rel="noopener">ORCID</a>.
+          <!-- Replace # above with your real profile URLs -->
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         BEYOND SCIENCE (3500 m)
+         ======================================================== -->
+    <section class="panel panel-abyssal" id="beyond" data-depth="3500">
+      <div class="wrap">
+        <p class="eyebrow">3500 m &middot; BEYOND SCIENCE</p>
+        <h2>The rest of the water column</h2>
+        <div class="beyond-grid">
+          <article>
+            <h3>Storytelling</h3>
+            <p>Live storytelling performed in more than twenty countries,
+            because the ocean is not the only thing worth narrating well.</p>
+          </article>
+          <article>
+            <h3>Photography</h3>
+            <p>Sports, nightlife and macro work: rugby pitches, dance floors,
+            and spiders photographed exactly where they live.</p>
+          </article>
+          <article>
+            <h3>Ultrarunning</h3>
+            <p>Self-supported distance running, including the
+            Gothenburg to Oslo FKT: roughly 350 km in five and a half days.</p>
+          </article>
+          <article>
+            <h3>Writing</h3>
+            <p>Essays and field notes at
+            <a href="https://egonomics.blog" target="_blank" rel="noopener">egonomics.blog</a>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         CONTACT / SEAFLOOR (4500 m)
+         ======================================================== -->
+    <section class="panel panel-floor" id="contact" data-depth="4500">
+      <div class="wrap">
+        <p class="eyebrow">4500 m &middot; SEAFLOOR &middot; CONTACT</p>
+        <h2>Get in touch</h2>
+        <p class="contact-line">
+          <!-- Replace with your real handles -->
+          <a href="mailto:your.email@reading.ac.uk">your.email@reading.ac.uk</a>
+        </p>
+        <ul class="contact-links">
+          <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Bluesky / X</a></li>
+          <li><a href="https://egonomics.blog" target="_blank" rel="noopener">Blog</a></li>
+        </ul>
+        <footer>
+          <p>&copy; 2026 Gaurav Madan &middot; Built with plain HTML, CSS and
+          stubbornness &middot; Hosted free on GitHub Pages</p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

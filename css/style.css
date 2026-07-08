@@ -1,0 +1,377 @@
+/* ================================================================
+   OCEANOGRAPHER GAURAV : water-column stylesheet
+   The page descends from surface light to abyssal dark.
+   All colours live in :root below. Change them once, they change
+   everywhere.
+   ================================================================ */
+
+:root {
+  /* Depth palette: surface to seafloor */
+  --surface:      #E8F1F2;   /* pale hydrographic-chart blue */
+  --thermocline:  #BFD9DC;   /* photic-zone blue-grey */
+  --deep:         #14424E;   /* deep teal-navy */
+  --abyssal:      #0B2833;   /* near-abyss */
+  --floor:        #061820;   /* seafloor ink */
+
+  /* Text and accents */
+  --ink:          #14323D;   /* dark text on light panels */
+  --foam:         #DCEBEC;   /* light text on dark panels */
+  --contour:      #7FA8AE;   /* contour lines, rules, muted text */
+  --buoy:         #D08A3C;   /* amber accent: links, markers */
+
+  /* Type */
+  --serif: 'Spectral', Georgia, serif;
+  --mono:  'IBM Plex Mono', 'Courier New', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--surface);
+  line-height: 1.65;
+}
+
+/* ----------------------------------------------------------------
+   NAVIGATION
+   ---------------------------------------------------------------- */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--contour);
+}
+
+.site-nav nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-name {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--buoy);
+  border-bottom-color: var(--buoy);
+}
+
+.nav-toggle { display: none; }
+
+/* ----------------------------------------------------------------
+   DEPTH RAIL (signature element)
+   ---------------------------------------------------------------- */
+.depth-rail {
+  position: fixed;
+  left: 1.4rem;
+  top: 15vh;
+  bottom: 8vh;
+  width: 2px;
+  z-index: 50;
+}
+
+.depth-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(var(--contour), var(--buoy));
+  opacity: 0.55;
+}
+
+.depth-marker {
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--buoy);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--buoy) 25%, transparent);
+  transition: top 0.1s linear;
+}
+
+.depth-marker span {
+  position: absolute;
+  left: 20px;
+  top: -4px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--buoy);
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------------
+   PANELS: each darker than the last
+   ---------------------------------------------------------------- */
+.panel { padding: 7rem 1.5rem; position: relative; overflow: hidden; }
+.wrap  { max-width: 900px; margin: 0 auto; }
+
+.panel-surface     { background: var(--surface);     color: var(--ink);  min-height: 92vh; display: flex; align-items: center; }
+.panel-thermocline { background: var(--thermocline); color: var(--ink); }
+.panel-deep        { background: var(--deep);        color: var(--foam); }
+.panel-abyssal     { background: var(--abyssal);     color: var(--foam); }
+.panel-floor       { background: var(--floor);       color: var(--foam); }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--buoy);
+  margin-bottom: 1.4rem;
+}
+
+h1 {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin-bottom: 1.4rem;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 1.6rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* ----------------------------------------------------------------
+   HERO
+   ---------------------------------------------------------------- */
+.hero { position: relative; z-index: 2; }
+
+.hero-sub {
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 300;
+  max-width: 34em;
+  margin-bottom: 1rem;
+}
+
+.hero-detail {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--ink) 70%, transparent);
+  margin-bottom: 3rem;
+}
+
+.descend-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.descend-cue svg { animation: bob 2.4s ease-in-out infinite; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+.contours {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 220px;
+  z-index: 1;
+}
+
+.contours path {
+  fill: none;
+  stroke: var(--contour);
+  stroke-width: 1.2;
+  opacity: 0.6;
+}
+
+/* ----------------------------------------------------------------
+   RESEARCH
+   ---------------------------------------------------------------- */
+.lede {
+  font-size: 1.15rem;
+  font-weight: 300;
+  max-width: 38em;
+  margin-bottom: 3rem;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.card {
+  border: 1px solid var(--contour);
+  padding: 1.6rem;
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+}
+
+.card p { font-size: 0.95rem; }
+
+/* ----------------------------------------------------------------
+   PUBLICATIONS
+   ---------------------------------------------------------------- */
+.pub-list { list-style: none; }
+
+.pub-list li {
+  display: flex;
+  gap: 1.6rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--contour) 40%, transparent);
+}
+
+.pub-year {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--buoy);
+  min-width: 3.2em;
+  padding-top: 0.25em;
+}
+
+.pub-title { font-size: 1.05rem; font-weight: 500; }
+
+.pub-meta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--foam) 65%, transparent);
+  margin-top: 0.25rem;
+}
+
+.pub-meta a, .aside-note a, .beyond-grid a, .contact-line a, .contact-links a {
+  color: var(--buoy);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--buoy) 45%, transparent);
+}
+
+.pub-meta a:hover, .aside-note a:hover, .beyond-grid a:hover,
+.contact-line a:hover, .contact-links a:hover {
+  border-bottom-color: var(--buoy);
+}
+
+.aside-note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--foam) 75%, transparent);
+}
+
+/* ----------------------------------------------------------------
+   BEYOND
+   ---------------------------------------------------------------- */
+.beyond-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.2rem 2.8rem;
+}
+
+.beyond-grid p { font-size: 0.95rem; color: color-mix(in srgb, var(--foam) 85%, transparent); }
+
+/* ----------------------------------------------------------------
+   CONTACT / FOOTER
+   ---------------------------------------------------------------- */
+.contact-line { font-size: 1.2rem; margin-bottom: 1.6rem; }
+
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  margin-bottom: 4rem;
+}
+
+footer p {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: color-mix(in srgb, var(--foam) 45%, transparent);
+}
+
+/* ----------------------------------------------------------------
+   MOBILE
+   ---------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .depth-rail { display: none; }
+
+  .panel { padding: 5rem 1.25rem; }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+
+  .nav-toggle span {
+    width: 22px; height: 2px;
+    background: var(--ink);
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--contour);
+    padding: 0.5rem 0;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-links li a {
+    display: block;
+    padding: 0.9rem 1.5rem;
+    border-bottom: none;
+  }
+}

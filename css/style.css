@@ -188,7 +188,7 @@ h3 {
 .hero-figure {
   position: absolute;
   right: clamp(2rem, 9vw, 12rem);
-  bottom: 0;
+  bottom: 10;
   height: min(38%, 82vh);
   width: auto;
   z-index: 2;

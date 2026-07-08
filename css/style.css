@@ -189,7 +189,7 @@ h3 {
   position: absolute;
   right: clamp(2rem, 9vw, 12rem);
   bottom: 5;
-  height: min(76%, 82vh);
+  height: min(46%, 76vh);
   width: auto;
   z-index: 2;
   pointer-events: none;

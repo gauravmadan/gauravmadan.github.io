@@ -17,10 +17,10 @@ position. Research sits at 1000 m, as it should.
 Go to https://github.com/new and create a repository named exactly:
 
 ```
-YOURUSERNAME.github.io
+gauravmadan.github.io
 ```
 
-Replace YOURUSERNAME with your actual GitHub username. This exact naming is
+Replace gauravmadan with your actual GitHub username. This exact naming is
 what tells GitHub "this repo is my website". Set it to **Public** (Pages is
 free for public repos). Do not initialise with a README since you already
 have one here.
@@ -34,7 +34,7 @@ git init
 git add .
 git commit -m "Launch: oceanographer website v1"
 git branch -M main
-git remote add origin https://github.com/YOURUSERNAME/YOURUSERNAME.github.io.git
+git remote add origin https://github.com/gauravmadan/gauravmadan.github.io.git
 git push -u origin main
 ```
 
@@ -54,7 +54,7 @@ Usually automatic for a `username.github.io` repo, but verify:
 Wait one to two minutes, then open:
 
 ```
-https://YOURUSERNAME.github.io
+https://gauravmadan.github.io
 ```
 
 Done. Every future `git push` to main redeploys automatically within a
@@ -64,7 +64,7 @@ minute or so.
 
 Buy a domain (roughly 10 to 15 GBP per year from Namecheap, Cloudflare, etc),
 then in Settings > Pages add it under "Custom domain" and follow GitHub's DNS
-instructions (a CNAME record pointing to YOURUSERNAME.github.io). Tick
+instructions (a CNAME record pointing to gauravmadan.github.io). Tick
 "Enforce HTTPS" once the certificate provisions.
 
 ---
@@ -86,7 +86,7 @@ Everything editable is marked with comments in the files.
 ### Adding a new page
 
 Create `photography.html` (copy `index.html` as a skeleton), push it, and it
-appears at `https://YOURUSERNAME.github.io/photography.html`. Link it from
+appears at `https://gauravmadan.github.io/photography.html`. Link it from
 the menu bar.
 
 ### Adding images
